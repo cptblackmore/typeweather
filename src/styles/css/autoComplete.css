@@ -1,0 +1,80 @@
+.autoComplete_wrapper {
+    position: relative;
+    height: 100%;
+}
+
+.autoComplete_wrapper > ul {
+    position: absolute;
+    max-height: 226px;
+    overflow-y: scroll;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: 8px 0 0 0;
+    border-radius: 8px;
+    background-color: var(--gray-500);
+    border: 1px solid rgba(33, 33, 33, 0.1);
+    z-index: 1000;
+    outline: none;
+    overflow: hidden;
+}
+
+.autoComplete_wrapper > ul > li {
+    display: block;
+    position: relative;
+    padding: 0 20px;
+    height: 56px;
+    list-style: none;
+    text-align: left;
+    line-height: 56px;
+    color: var(--gray-100);
+    transition: all 0.1s ease-in-out;
+    background-color: transparent;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+}
+
+.autoComplete_wrapper > ul > li + li::before {
+    content: '';
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    background-color: var(--gray-600);
+}
+
+.autoComplete_wrapper > ul > li::selection {
+    color: rgba(#ffffff, 0);
+    background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_wrapper > ul > li:hover {
+    cursor: pointer;
+    background-color: rgba(143, 178, 245, 0.2);
+}
+
+.autoComplete_wrapper > ul > li mark {
+    background-color: transparent;
+    color: var(--blue-light);
+    font-weight: bold;
+}
+
+.autoComplete_wrapper > ul > li mark::selection {
+    color: rgba(#ffffff, 0);
+    background-color: rgba(#ffffff, 0);
+}
+
+.autoComplete_wrapper > ul > li[aria-selected='true'] {
+    background-color: rgba(143, 178, 245, 0.2);
+}
+
+/* @media only screen and (max-width: 600px) {
+    .autoComplete_wrapper > input {
+        width: 18rem;
+    }
+} */
