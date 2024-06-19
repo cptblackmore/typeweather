@@ -27,4 +27,8 @@ module.exports = {
 	new FaviconsWebpackPlugin('./src/assets/images/logo-small.svg'),
   ],
   mode: 'development',
+  devServer: {
+    host: '192.168.0.195',
+    port: 8080,
+}
 };

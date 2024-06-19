@@ -431,7 +431,7 @@ body:has(.weather) .background {
     font-size: var(--text-sm-size);
     line-height: var(--text-sm-line-height);
 }
-.search__loading.loading::before {
+.search__loading.is-weather-loading::before {
     content: '';
 
     position: absolute;
@@ -443,7 +443,7 @@ body:has(.weather) .background {
     background-image: url(/src/assets/images/loading.gif);
     background-size: cover;
 }
-.search__loading.loading::after {
+.search__loading.is-weather-loading::after {
     content: '';
 
     position: absolute;
@@ -454,7 +454,7 @@ body:has(.weather) .background {
     height: 100%;
     background-color: transparent;
 }
-.search__loading.loading {
+.search__loading.is-weather-loading {
     user-select: none;
     -moz-user-select: none;
     -khtml-user-select: none;
@@ -462,9 +462,21 @@ body:has(.weather) .background {
     -o-user-select: none;
     pointer-events: none;
 }
-.search__loading.loading .search__input {
+.search__loading.is-weather-loading .search__input {
     background-color: var(--gray-700);
     color: var(--gray-400);
+}
+.search__loading.is-address-loading::before {
+    content: '';
+
+    position: absolute;
+    z-index: 1;
+    top: 12px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    background-image: url(/src/assets/images/loading.gif);
+    background-size: cover;
 }
 
 /* Transparent placeholder */

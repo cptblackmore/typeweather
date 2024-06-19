@@ -82,10 +82,11 @@ async function showIntro() {
                 src: async (query) => {
                     try {
                         let data = [];
+                        if (query.length >= 3) addAddressLoadingClass();
                         const response = await fetch(
                             `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=ru&apiKey=e3883b2201c74fe99dbd1ac36a442678`
                         );
-
+                        removeAddressLoadingClass();
                         const result = await response.json();
                         data = result.features.map(
                             (feature) => feature.properties.formatted
@@ -627,10 +628,30 @@ function fadeIn() {
     contentWrapper.classList.remove('fade-out');
     contentWrapper.classList.add('fade-in');
 }
+function addAddressLoadingClass() {
+    document
+        .querySelector('.search__loading')
+        .classList.add('is-address-loading');
+}
+function removeAddressLoadingClass() {
+    document
+        .querySelector('.search__loading')
+        .classList.remove('is-address-loading');
+}
+function addWeatherLoadingClass() {
+    document
+        .querySelector('.search__loading')
+        .classList.add('is-weather-loading');
+}
+function removeWeatherLoadingClass() {
+    document
+        .querySelector('.search__loading')
+        .classList.remove('is-weather-loading');
+}
 
 async function showWeather(event, query) {
     try {
-        event.target.closest('.search__loading').classList.add('loading');
+        addWeatherLoadingClass();
         const coordinates = await getCoordinates(query);
         const latitude = coordinates[0];
         const longitude = coordinates[1];
@@ -681,11 +702,11 @@ async function showWeather(event, query) {
                 src: async (query) => {
                     try {
                         let data = [];
+                        if (query.length >= 3) addAddressLoadingClass();
                         const response = await fetch(
                             `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=ru&apiKey=e3883b2201c74fe99dbd1ac36a442678`
-                        ).catch((e) => {
-                            throw e;
-                        });
+                        );
+                        removeAddressLoadingClass();
                         const result = await response.json();
                         data = result.features.map(
                             (feature) => feature.properties.formatted
@@ -727,7 +748,7 @@ async function showWeather(event, query) {
         document.querySelector(
             '.search__error'
         ).textContent = `Ошибка: ${error}`;
-        event.target.closest('.search__loading').classList.remove('loading');
+        removeWeatherLoadingClass();
         event.target.value = '';
     }
 }
