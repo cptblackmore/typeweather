@@ -132,16 +132,24 @@ async function showIntro() {
 
 async function getCoordinates(query) {
     try {
-        const response = await fetch(
-            `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=ru&type=city&apiKey=e3883b2201c74fe99dbd1ac36a442678`
-        );
-        const result = await response.json();
-        if (result.features[0]) {
-            const latitude = result.features[0].properties.lat;
-            const longitude = result.features[0].properties.lon;
-            return [latitude, longitude];
+        const storedCoordinates = localStorage.getItem(query);
+        if (storedCoordinates) {
+            const coordinatesArray = storedCoordinates.split(',');
+            return [coordinatesArray[0], coordinatesArray[1]];
         } else {
-            throw new Error('Координаты отсутствуют');
+            const response = await fetch(
+                `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=ru&type=city&apiKey=e3883b2201c74fe99dbd1ac36a442678`
+            );
+            const result = await response.json();
+            if (result.features[0]) {
+                const latitude = result.features[0].properties.lat;
+                const longitude = result.features[0].properties.lon;
+                const coordinates = [latitude, longitude];
+                localStorage.setItem(query, coordinates);
+                return coordinates;
+            } else {
+                throw new Error('Координаты отсутствуют');
+            }
         }
     } catch (error) {
         throw error;
@@ -652,6 +660,22 @@ function removeWeatherLoadingClass() {
 async function showWeather(event, query) {
     try {
         addWeatherLoadingClass();
+        // if (localStorage.getItem(query)) {
+        //     console.log('Такие координаты уже есть, используем их');
+        //     const coordinates = localStorage.getItem(query).split(',');
+        //     console.log(coordinates);
+        //     const weather = await getWeather(coordinates[0], coordinates[1]);
+        //     console.log(weather);
+        //     return weather;
+        // } else {
+        //     console.log('Таких координат ещё нет, получаем новые');
+        //     const coordinates = await getCoordinates(query);
+        //     localStorage.setItem(query, coordinates);
+        //     const weather = await getWeather(coordinates[0], coordinates[1]);
+        //     return weather;
+        // }
+        // console.log(coordinates);
+
         const coordinates = await getCoordinates(query);
         const latitude = coordinates[0];
         const longitude = coordinates[1];
