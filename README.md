@@ -21,6 +21,7 @@
 ![Пример работы](https://github.com/user-attachments/assets/aef58c09-8557-4f03-b7d6-cf49b0161dfb)
 
 ## Инструменты и подходы
+
 При создании этого пет-проекта использовалось следующее:
 - HTML/CSS/JS
 - Webpack
