@@ -2,12 +2,12 @@
 
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Open-Meteo](https://img.shields.io/badge/Weather_by-Open_Meteo-orange.svg)](https://open-meteo.com/)
-[![Geoapify](https://img.shields.io/badge/Location_by-Geoapify-49368a.svg)](https://www.geoapify.com/)
-[![autoComplete.js](https://img.shields.io/badge/Search_with-autoComplete.js-eb5642.svg)](https://github.com/TarekRaafat/autoComplete.js)
+[![Geoapify](https://img.shields.io/badge/Search_by-Geoapify-49368a.svg)](https://www.geoapify.com/)
+[![autoComplete.js](https://img.shields.io/badge/Input_with-autoComplete.js-eb5642.svg)](https://github.com/TarekRaafat/autoComplete.js)
 ![W3C](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fcptblackmore-typeweather.netlify.app%2F)
 ![status](https://img.shields.io/website?url=https%3A%2F%2Fcptblackmore-typeweather.netlify.app%2F)
 
-Готовый пет-проект в виде простого сайта для просмотра прогноза погоды по введённому адресу. Создан мною с нуля по существующему общедоступному [макету](https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1).
+Готовый пет-проект в виде простого сайта для просмотра прогноза погоды по введённому названию места. Создан мною с нуля по существующему общедоступному [макету](https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1).
 
 > [Ссылка на демо](https://cptblackmore-typeweather.netlify.app)
 
@@ -20,16 +20,16 @@
 
 ![Пример работы сайта](https://github.com/user-attachments/assets/aef58c09-8557-4f03-b7d6-cf49b0161dfb)
 
-## Технологии/методологии/инструменты
+## Инструменты и подходы
 При создании этого пет-проекта использовалось следующее:
 - HTML/CSS/JS
 - Webpack
-- Различные плагины и загрузчики зависимостей для Webpack
+- Различные плагины и загрузчики зависимостей для Webpack (css-loader, favicons-webpack-plugin и т.п.)
 - [autoComplete.js](https://github.com/TarekRaafat/autoComplete.js) - небольшая библиотека для лёгкой реализации автозаполнения
 - [Open-Meteo](https://open-meteo.com/) - сервис, предоставляющий бесплатный API с данными о погоде
 - [Geoapify](https://www.geoapify.com/) - сервис, предоставляющий бесплатный тариф и API с данными о геолокации
-- Figma (для вёрстки с [макета](https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1))
-- BEM-нейминг
+- Figma (для вёрстки по [макету](https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1))
+- БЭМ-нейминг
 - Адаптивная вёрстка
 
 ![Пример интерфейса](https://github.com/user-attachments/assets/492cb507-d5c3-422b-b399-9a75943c4729)
@@ -44,10 +44,23 @@
 
 ## Особенности проекта
 
-- Проект объединяет данные из двух API, сначала получая данные по поисковому запросу, а затем отправляя запрос с координатами из выбранного варианта в сервис с погодой.
-- Open-Meteo не может предоставить данные по некоторым предложенным вариантам из Geoapify из-за своих внутренних особенностей. В таких случаях в поисковой строке выводится ошибка.
+- Проект объединяет данные из двух API, сначала получая данные по поисковому запросу, а затем отправляя запрос с координатами выбранного варианта в сервис с погодой.
+- Большая часть HTML разметки генерируется динамически с помощью кода. При отображении погоды/возвращении на главную меняется не вся страница, а только содержимое одного блока.
+- Повторный выбор одних и тех же мест не приводит к повторным запросам, так как их координаты сохраняются в хранилище браузера (localStorage). Это добавляет быстродействия и экономит ограниченное количество запросов в Geopify.
+- Open-Meteo не может предоставить полные данные по некоторым координатам из Geoapify из-за своих внутренних особенностей. В таких случаях в поисковой строке выводится ошибка.
 - На данный момент Geoapify может предлагать лишние варианты (дубли, почтовые индексы).
-- Большая часть HTML разметки генерируется кодом и при отображении погоды/возвращении на главную меняется не страница, а содержимое одного блока.
+
+### Идеи по улучшению
+
+- Использование History API для удобного перемещения между главной и погодой.
+- Создание динамического обновления информации о погоде с определённым интервалом, без необходимости повторять запрос вручную.
+- Избавление от лишних/повторяющихся вариантов в поиске.
+
+## Author
+
+**Victor** *aka* **captain_blackmore**
+- [Telegram](https://t.me/captain_blackmore)
+- [Github](https://github.com/cptblackmore)
 
 ## License
 
