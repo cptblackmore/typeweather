@@ -600,6 +600,29 @@ body:has(.weather) .background {
     filter: drop-shadow(0 0 40px #ffee94);
 }
 
+.copyright {
+    position: fixed;
+    text-align: center;
+    width: 100%;
+    padding: 0.5em;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 1em;
+    color: rgb(150, 150, 150, 0.5);
+}
+.copyright__name {
+    color: rgb(190, 190, 190, 0.5);
+    text-decoration: none;
+}
+.copyright > a {
+    color: rgb(190, 190, 190, 0.5);
+    transition: color 0.1s ease;
+}
+.copyright > a:hover {
+    color: rgb(250, 250, 250, 0.5);
+}
+
 @media (max-width: 1230px) {
     .container {
         max-width: 100vw;
@@ -647,6 +670,10 @@ body:has(.weather) .background {
         flex-direction: column;
         gap: 8px;
         padding: 8px;
+    }
+
+    .copyright {
+        font-size: 0.9em;
     }
 }
 @media (max-width: 600px) {
@@ -743,5 +770,9 @@ body:has(.weather) .background {
         font-weight: var(--heading-xs-weight);
         font-size: var(--heading-xs-size);
         line-height: var(--heading-xs-line-height);
+    }
+
+    .copyright {
+        font-size: 0.8em;
     }
 }
