@@ -7,6 +7,8 @@
 ![W3C](https://img.shields.io/w3c-validation/html?targetUrl=https%3A%2F%2Fcptblackmore-typeweather.netlify.app%2F)
 ![status](https://img.shields.io/website?url=https%3A%2F%2Fcptblackmore-typeweather.netlify.app%2F)
 
+- [English version of README](./README.en.md)
+
 Готовый пет-проект в виде простого сайта для просмотра прогноза погоды по введённому названию места. Создан мною с нуля по существующему общедоступному [макету](https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1).
 
 > [Ссылка на демо](https://cptblackmore-typeweather.netlify.app)
