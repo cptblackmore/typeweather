@@ -9,7 +9,7 @@
 
 - [English version of README](./README.en.md)
 
-Готовый пет-проект в виде простого сайта для просмотра прогноза погоды по введённому названию места. Создан мною с нуля по существующему общедоступному [макету](https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1).
+Готовый пет-проект в виде простого сайта для просмотра прогноза погоды по введённому названию места. Создан мною с нуля по существующему общедоступному [макету](<https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1>).
 
 > [Ссылка на демо](https://cptblackmore-typeweather.netlify.app)
 
@@ -25,13 +25,14 @@
 ## Инструменты и подходы
 
 При создании этого пет-проекта использовалось следующее:
+
 - HTML/CSS/JS
 - Webpack
 - Различные плагины и загрузчики зависимостей для Webpack (css-loader, favicons-webpack-plugin и т.п.)
 - [autoComplete.js](https://github.com/TarekRaafat/autoComplete.js) - небольшая библиотека для лёгкой реализации автозаполнения
 - [Open-Meteo](https://open-meteo.com/) - сервис, предоставляющий бесплатный API с данными о погоде
 - [Geoapify](https://www.geoapify.com/) - сервис, предоставляющий бесплатный тариф и API с данными о геолокации
-- Figma (для вёрстки по [макету](https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1))
+- Figma (для вёрстки по [макету](<https://www.figma.com/design/Al6QzbeKiSoNHB95bHbmMC/TypeWeather-(Community)?node-id=3-376&t=1Zwxo7ViOBD21n7e-1>))
 - БЭМ-нейминг
 - Адаптивная вёрстка
 
@@ -42,8 +43,8 @@
 1. Клонируйте репозиторий: `git clone https://github.com/cptblackmore/typeweather`
 2. Перейдите в директорию репозитория: `cd typeweather`
 3. Установите зависимости: `npm install`
-3. Запустите проект: `npm start`
-4. Перейдите по [localhost:8080](http://localhost:8080/) на том же устройстве, либо с другого устройства в вашей сети, по появившемуся в терминале адресу.
+4. Запустите проект: `npm start`
+5. Перейдите по [localhost:8080](http://localhost:8080/) на том же устройстве, либо с другого устройства в вашей сети, по появившемуся в терминале адресу.
 
 ## Особенности проекта
 
@@ -61,7 +62,8 @@
 
 ## Author
 
-**Victor** *aka* **captain_blackmore**
+**Victor** _aka_ **captain_blackmore**
+
 - [Telegram](https://t.me/captain_blackmore)
 - [Github](https://github.com/cptblackmore)
 
@@ -72,8 +74,10 @@ This project is licensed under the MIT License - see the [LICENSE](./LICENSE) fi
 ### Acknowledgements
 
 This project makes use of the following open-source libraries:
+
 - [autoComplete.js](https://github.com/TarekRaafat/autoComplete.js) - Licensed under the [Apache 2.0](https://opensource.org/license/apache-2-0).
 
 This project uses data from the following external sources:
+
 - Weather data is provided by [Open-Meteo](https://open-meteo.com/) and licensed under the [Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/). No changes were made to the original data.
 - Map data is provided by [OpenStreetMap](https://www.openstreetmap.org/copyright) with the support of [Geoapify](https://www.geoapify.com/) and licensed under the [Open Database License (ODbL)](https://opendatacommons.org/licenses/odbl/1-0/).
