@@ -1,4 +1,4 @@
-import introLogoIcon from "../../assets/images/logo-full.svg";
+import introLogoIcon from "../../../assets/images/logo-full.svg";
 
 export default function renderIntro() {
   return /*html*/ `

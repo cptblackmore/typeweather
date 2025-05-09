@@ -1,11 +1,12 @@
 import "../styles/css/main.css";
 import autoComplete from "@tarekraafat/autocomplete.js";
-import introLogoIcon from "../assets/images/logo-full.svg";
 import weatherDetailsApparentTemperatureIcon from "../assets/images/details-icons/apparent-temperature.svg";
 import weatherDetailsPrecitipationProbabilityIcon from "../assets/images/details-icons/precipitation-probability.svg";
 import weatherDetailsRelativeHumidityIcon from "../assets/images/details-icons/relative-humidity.svg";
 import weatherDetailsUVIndexIcon from "../assets/images/details-icons/uv-index.svg";
 import weatherDetailsWindSpeedIcon from "../assets/images/details-icons/wind-speed.svg";
+import renderIntro from "./ui/intro/renderIntro.mjs";
+import renderWeather from "./ui/weather/renderWeather.mjs";
 
 const contentWrapper = document.querySelector(".content-wrapper");
 document.addEventListener("DOMContentLoaded", () => {
@@ -46,36 +47,7 @@ contentWrapper.addEventListener("click", (event) => {
 async function showIntro() {
   try {
     await fadeOut();
-    contentWrapper.innerHTML = `<div class="intro">
-        <div class="intro__logo">
-            <img src="${introLogoIcon}" alt="TypeWeather" />
-        </div>
-        <h1 class="intro__title">
-            Добро пожаловать в
-            <span class="intro__title-highlighted">TypeWeather</span>
-        </h1>
-        <p class="intro__text">Напиши место, чтобы узнать прогноз погоды</p>
-        <div class="intro__search">
-            <form action="" class="search">
-                <label class="search__loading">
-                    <p class="search__error"></p>
-                    <input
-                        class="search__input"
-                        id="autoComplete"
-                        type="search"
-                        placeholder="Поиск места"
-                        dir="ltr"
-                        spellcheck="false"
-                        autocorrect="off"
-                        autocomplete="off"
-                        autocapitalize="off"
-                        maxlength="2048"
-                        tabindex="1"
-                    />
-                </label>
-            </form>
-        </div>
-    </div>`;
+    contentWrapper.innerHTML = renderIntro();
     const autoCompleteJS = new autoComplete({
       selector: "#autoComplete",
       data: {
@@ -127,57 +99,49 @@ async function showIntro() {
 }
 
 async function getCoordinates(query) {
-  try {
-    const storedCoordinates = localStorage.getItem(query);
-    if (storedCoordinates) {
-      const coordinatesArray = storedCoordinates.split(",");
-      return [coordinatesArray[0], coordinatesArray[1]];
+  const storedCoordinates = localStorage.getItem(query);
+  if (storedCoordinates) {
+    const coordinatesArray = storedCoordinates.split(",");
+    return [coordinatesArray[0], coordinatesArray[1]];
+  } else {
+    const response = await fetch(
+      `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=ru&type=city&apiKey=e3883b2201c74fe99dbd1ac36a442678`,
+    );
+    const result = await response.json();
+    if (result.features[0]) {
+      const latitude = result.features[0].properties.lat;
+      const longitude = result.features[0].properties.lon;
+      const coordinates = [latitude, longitude];
+      localStorage.setItem(query, coordinates);
+      return coordinates;
     } else {
-      const response = await fetch(
-        `https://api.geoapify.com/v1/geocode/autocomplete?text=${query}&lang=ru&type=city&apiKey=e3883b2201c74fe99dbd1ac36a442678`,
-      );
-      const result = await response.json();
-      if (result.features[0]) {
-        const latitude = result.features[0].properties.lat;
-        const longitude = result.features[0].properties.lon;
-        const coordinates = [latitude, longitude];
-        localStorage.setItem(query, coordinates);
-        return coordinates;
-      } else {
-        throw new Error("Координаты отсутствуют");
-      }
+      throw new Error("Координаты отсутствуют");
     }
-  } catch (error) {
-    throw error;
   }
 }
 
 async function getWeather(latitude, longitude) {
-  try {
-    const response = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_probability_max&timezone=auto`,
-    );
-    const result = await response.json();
-    const weather = {
-      currentTemperature: result.current.temperature_2m,
-      currentTime: result.current.time,
-      currentIsDay: result.current.is_day,
-      currentWeatherCode: result.current.weather_code,
-      currentApparentTemperature: result.current.apparent_temperature,
-      currentRelativeHumidity: result.current.relative_humidity_2m,
-      currentWindSpeed: result.current.wind_speed_10m,
-      dailyTemperatureMin: result.daily.temperature_2m_min,
-      dailyTemperatureMax: result.daily.temperature_2m_max,
-      dailyTime: result.daily.time,
-      dailyPrecipitationProbability: result.daily.precipitation_probability_max,
-      dailyUVIndex: result.daily.uv_index_max,
-      dailyWeatherCode: result.daily.weather_code,
-    };
+  const response = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current=temperature_2m,relative_humidity_2m,apparent_temperature,weather_code,is_day,wind_speed_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,uv_index_max,precipitation_probability_max&timezone=auto`,
+  );
+  const result = await response.json();
+  const weather = {
+    currentTemperature: result.current.temperature_2m,
+    currentTime: result.current.time,
+    currentIsDay: result.current.is_day,
+    currentWeatherCode: result.current.weather_code,
+    currentApparentTemperature: result.current.apparent_temperature,
+    currentRelativeHumidity: result.current.relative_humidity_2m,
+    currentWindSpeed: result.current.wind_speed_10m,
+    dailyTemperatureMin: result.daily.temperature_2m_min,
+    dailyTemperatureMax: result.daily.temperature_2m_max,
+    dailyTime: result.daily.time,
+    dailyPrecipitationProbability: result.daily.precipitation_probability_max,
+    dailyUVIndex: result.daily.uv_index_max,
+    dailyWeatherCode: result.daily.weather_code,
+  };
 
-    return weather;
-  } catch (error) {
-    throw error;
-  }
+  return weather;
 }
 
 function setWeatherHTML(weather, query) {
@@ -279,335 +243,28 @@ function setWeatherHTML(weather, query) {
     };
   }
 
-  const weatherHTML = `<div class="container">
-        <div class="weather">
-            <div class="weather__primary">
-                <div class="weather__primary-header">
-                    <button class="weather__primary-logo-button" data-action="show-intro">
-                    </button>
-                    <div class="weather__primary-search">
-                        <form action="" class="search">
-                            <label class="search__loading">
-                                <p class="search__error"></p>
-                                <input
-                                    class="search__input"
-                                    id="autoComplete"
-                                    type="search"
-                                    placeholder="Поиск места"
-                                    dir="ltr"
-                                    spellcheck="false"
-                                    autocorrect="off"
-                                    autocomplete="off"
-                                    autocapitalize="off"
-                                    maxlength="2048"
-                                    tabindex="0"
-                                />
-                            </label>
-                        </form>
-                    </div>
-                </div>
-                <main class="weather__primary-main ${primaryWeatherBackgroundClass}">
-                    <div class="weather__primary-main-top">
-                        <div
-                            class="weather__primary-main-top-left"
-                        >
-                            <p
-                                class="weather__primary-place"
-                            >
-                                ${query}
-                            </p>
-                            <p
-                                class="weather__primary-date"
-                            >
-                                ${primaryDate}
-                            </p>
-                        </div>
-                        <div
-                            class="weather__primary-main-top-right"
-                        >
-                            <p
-                                class="weather__primary-time"
-                            >
-                                ${primaryTime}
-                            </p>
-                        </div>
-                    </div>
-                    <div class="weather__primary-main-bottom">
-                        <div
-                            class="weather__primary-main-bottom-left"
-                        >
-                            <p
-                                class="weather__primary-temperature"
-                            >
-                                ${primaryTemperature}ºc
-                            </p>
-                            <div class="weather__primary-info">
-                                <p
-                                    class="weather__primary-minmax-temperature"
-                                >
-                                    ${primaryTemperatureMax}ºc / ${primaryTemperatureMin}ºc
-                                </p>
-                                <p
-                                    class="weather__primary-weather-condition"
-                                >
-                                    ${primaryWeatherCondition}
-                                </p>
-                            </div>
-                        </div>
-                        <div
-                            class="weather__primary-main-bottom-right"
-                        >
-                            <img
-                                alt=""
-                                class="weather__primary-weather-icon ${primaryWeatherIconClass}"
-                            />
-                        </div>
-                    </div>
-                </main>
-            </div>
-            <div class="weather__additional-info">
-                <div class="weather__details">
-                    <h2 class="weather__details-title">
-                        Подробности о погоде
-                    </h2>
-                    <div class="weather__details-item">
-                        <img
-                            src="${weatherDetailsApparentTemperatureIcon}"
-                            alt=""
-                            class="weather__details-item-icon"
-                        />
-                        <p class="weather__details-item-name">
-                            Ощутимая температура
-                        </p>
-                        <p
-                            class="weather__details-item-info"
-                        >
-                            ${detailsApparentTemperature}ºc
-                        </p>
-                    </div>
-                    <div class="weather__details-item">
-                        <img
-                            src="${weatherDetailsPrecitipationProbabilityIcon}"
-                            alt=""
-                            class="weather__details-item-icon"
-                        />
-                        <p class="weather__details-item-name">
-                            Вероятность осадков
-                        </p>
-                        <p
-                            class="weather__details-item-info"
-                        >
-                            ${detailsPrecipitationProbability}%
-                        </p>
-                    </div>
-                    <div class="weather__details-item">
-                        <img
-                            src="${weatherDetailsWindSpeedIcon}"
-                            alt=""
-                            class="weather__details-item-icon"
-                        />
-                        <p class="weather__details-item-name">
-                            Скорость ветра
-                        </p>
-                        <p
-                            class="weather__details-item-info"
-                        >
-                            ${detailsWindSpeed} km/h
-                        </p>
-                    </div>
-                    <div class="weather__details-item">
-                        <img
-                            src="${weatherDetailsRelativeHumidityIcon}"
-                            alt=""
-                            class="weather__details-item-icon"
-                        />
-                        <p class="weather__details-item-name">
-                            Влажность воздуха
-                        </p>
-                        <p
-                            class="weather__details-item-info"
-                        >
-                            ${detailsRelativeHumidity}%
-                        </p>
-                    </div>
-                    <div class="weather__details-item">
-                        <img
-                            src="${weatherDetailsUVIndexIcon}"
-                            alt=""
-                            class="weather__details-item-icon"
-                        />
-                        <p class="weather__details-item-name">
-                            УФ Индекс
-                        </p>
-                        <p
-                            class="weather__details-item-info"
-                        >
-                            ${detailsUVIndex}
-                        </p>
-                    </div>
-                </div>
-                <div class="weather__forecast">
-                    <h2 class="weather__forecast-title">
-                        Прогноз на 5 дней
-                    </h2>
-                    <div class="weather__forecast-wrapper">
-                        <div class="weather__forecast-row">
-                            <div class="weather__forecast-item">
-                                <p
-                                    class="weather__forecast-item-day"
-                                >
-                                    Завтра
-                                </p>
-                                <img
-                                    alt=""
-                                    class="weather__forecast-item-icon ${forecast[1].weatherIconClass}"
-                                />
-                                <p
-                                    class="weather__forecast-weather-condition"
-                                >
-                                    ${forecast[1].weatherCondition}
-                                </p>
-                                <div
-                                    class="weather__forecast-temperatures"
-                                >
-                                    <p
-                                        class="weather__forecast-max-temperature"
-                                    >
-                                        ${forecast[1].weatherTemperatureMax}ºc
-                                    </p>
-                                    <p
-                                        class="weather__forecast-min-temperature"
-                                    >
-                                        ${forecast[1].weatherTemperatureMin}ºc
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="weather__forecast-item">
-                                <p
-                                    class="weather__forecast-item-day"
-                                >
-                                    ${forecast[2].day}
-                                </p>
-                                <img
-                                    alt=""
-                                    class="weather__forecast-item-icon ${forecast[2].weatherIconClass}"
-                                />
-                                <p
-                                    class="weather__forecast-weather-condition"
-                                >
-                                    ${forecast[2].weatherCondition}
-                                </p>
-                                <div
-                                    class="weather__forecast-temperatures"
-                                >
-                                    <p
-                                        class="weather__forecast-max-temperature"
-                                    >
-                                        ${forecast[2].weatherTemperatureMax}ºc
-                                    </p>
-                                    <p
-                                        class="weather__forecast-min-temperature"
-                                    >
-                                        ${forecast[2].weatherTemperatureMin}ºc
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="weather__forecast-item">
-                                <p
-                                    class="weather__forecast-item-day"
-                                >
-                                    ${forecast[3].day}
-                                </p>
-                                <img
-                                    alt=""
-                                    class="weather__forecast-item-icon ${forecast[3].weatherIconClass}"
-                                />
-                                <p
-                                    class="weather__forecast-weather-condition"
-                                >
-                                    ${forecast[3].weatherCondition}
-                                </p>
-                                <div
-                                    class="weather__forecast-temperatures"
-                                >
-                                    <p
-                                        class="weather__forecast-max-temperature"
-                                    >
-                                        ${forecast[3].weatherTemperatureMax}ºc
-                                    </p>
-                                    <p
-                                        class="weather__forecast-min-temperature"
-                                    >
-                                        ${forecast[3].weatherTemperatureMin}ºc
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="weather__forecast-item">
-                                <p
-                                    class="weather__forecast-item-day"
-                                >
-                                    ${forecast[4].day}
-                                </p>
-                                <img
-                                    alt=""
-                                    class="weather__forecast-item-icon ${forecast[4].weatherIconClass}"
-                                />
-                                <p
-                                    class="weather__forecast-weather-condition"
-                                >
-                                    ${forecast[4].weatherCondition}
-                                </p>
-                                <div
-                                    class="weather__forecast-temperatures"
-                                >
-                                    <p
-                                        class="weather__forecast-max-temperature"
-                                    >
-                                        ${forecast[4].weatherTemperatureMax}ºc
-                                    </p>
-                                    <p
-                                        class="weather__forecast-min-temperature"
-                                    >
-                                        ${forecast[4].weatherTemperatureMin}ºc
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="weather__forecast-item">
-                                <p
-                                    class="weather__forecast-item-day"
-                                >
-                                    ${forecast[5].day}
-                                </p>
-                                <img
-                                    alt=""
-                                    class="weather__forecast-item-icon ${forecast[5].weatherIconClass}"
-                                />
-                                <p
-                                    class="weather__forecast-weather-condition"
-                                >
-                                    ${forecast[5].weatherCondition}
-                                </p>
-                                <div
-                                    class="weather__forecast-temperatures"
-                                >
-                                    <p
-                                        class="weather__forecast-max-temperature"
-                                    >
-                                        ${forecast[5].weatherTemperatureMax}ºc
-                                    </p>
-                                    <p
-                                        class="weather__forecast-min-temperature"
-                                    >
-                                        ${forecast[5].weatherTemperatureMin}ºc
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>`;
+  const weatherHTML = renderWeather({
+    query,
+    primaryWeatherBackgroundClass,
+    primaryDate,
+    primaryTime,
+    primaryTemperature,
+    primaryTemperatureMax,
+    primaryTemperatureMin,
+    primaryWeatherCondition,
+    primaryWeatherIconClass,
+    weatherDetailsApparentTemperatureIcon,
+    weatherDetailsPrecitipationProbabilityIcon,
+    weatherDetailsWindSpeedIcon,
+    weatherDetailsRelativeHumidityIcon,
+    weatherDetailsUVIndexIcon,
+    detailsApparentTemperature,
+    detailsPrecipitationProbability,
+    detailsWindSpeed,
+    detailsRelativeHumidity,
+    detailsUVIndex,
+    forecast,
+  });
 
   return weatherHTML;
 }

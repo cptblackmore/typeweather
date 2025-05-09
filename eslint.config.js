@@ -12,7 +12,7 @@ export default [
   },
   {
     ...js.configs.recommended,
-    files: ["**/*.js"],
+    files: ["**/*.js", "**/*.mjs"],
     plugins: {
       import: importPlugin,
       prettier: prettierPlugin,
@@ -30,6 +30,8 @@ export default [
     rules: {
       "import/no-unresolved": "error",
       "import/order": "warn",
+      "no-empty": "warn",
+      "no-useless-catch": "warn",
       "prettier/prettier": "warn",
     },
   },
