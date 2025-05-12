@@ -3,6 +3,7 @@ import css from "@eslint/css";
 import importPlugin from "eslint-plugin-import";
 import globals from "globals";
 import prettierPlugin from "eslint-plugin-prettier";
+import pathAliasPlugin from "eslint-import-resolver-alias";
 
 export default [
   {
@@ -16,6 +17,7 @@ export default [
     plugins: {
       import: importPlugin,
       prettier: prettierPlugin,
+      pathAlias: pathAliasPlugin,
     },
     languageOptions: {
       globals: globals.browser,
@@ -25,10 +27,18 @@ export default [
         webpack: {
           config: "./webpack.config.eslint.cjs",
         },
+        alias: {
+          map: [
+            ["@assets", "./src/assets"],
+            ["@", "./src"],
+          ],
+          extensions: [".js", ".mjs", ".json"],
+        },
       },
     },
     rules: {
       "import/no-unresolved": "error",
+      "no-undef": "error",
       "import/order": "warn",
       "no-empty": "warn",
       "no-useless-catch": "warn",

@@ -12,6 +12,13 @@ export default {
     filename: "bundle.js",
     path: path.resolve(__dirname, "dist"),
   },
+  resolve: {
+    alias: {
+      "@assets": path.resolve(__dirname, "src/assets"),
+      "@": path.resolve(__dirname, "src"),
+    },
+    extensions: [".js", ".mjs", ".json", ".svg"],
+  },
   module: {
     rules: [
       {

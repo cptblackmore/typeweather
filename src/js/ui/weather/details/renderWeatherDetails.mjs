@@ -1,11 +1,11 @@
 import renderWeatherDetailsItem from "./renderWeatherDetailsItem.mjs";
+import weatherDetailsApparentTemperatureIcon from "@assets/images/details-icons/apparent-temperature.svg";
+import weatherDetailsPrecitipationProbabilityIcon from "@assets/images/details-icons/precipitation-probability.svg";
+import weatherDetailsRelativeHumidityIcon from "@assets/images/details-icons/relative-humidity.svg";
+import weatherDetailsUVIndexIcon from "@assets/images/details-icons/uv-index.svg";
+import weatherDetailsWindSpeedIcon from "@assets/images/details-icons/wind-speed.svg";
 
 export default function renderWeatherDetails({
-  weatherDetailsApparentTemperatureIcon,
-  weatherDetailsPrecitipationProbabilityIcon,
-  weatherDetailsWindSpeedIcon,
-  weatherDetailsRelativeHumidityIcon,
-  weatherDetailsUVIndexIcon,
   detailsApparentTemperature,
   detailsPrecipitationProbability,
   detailsWindSpeed,
