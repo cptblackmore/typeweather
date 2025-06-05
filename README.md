@@ -13,6 +13,10 @@
 
 > [Ссылка на демо](https://cptblackmore-typeweather.netlify.app)
 
+###### Другие проекты
+
+[![JobTracker](https://img.shields.io/badge/JobTracker-96b9ff.svg?logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MiA3Mic+DQogIDxyZWN0IHdpZHRoPSc3MicgaGVpZ2h0PSc3Micgcng9JzgnIGZpbGw9JyMzNzVFOTcnIC8+DQogIDxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDUsIDUpJyBmaWxsPScjRUFGMkZGJz4NCiAgICA8cGF0aCBkPSdNMTEuNDAgNDlRNy44NSA0OSA0Ljg4IDQ3LjY3UTEuOTAgNDYuMzUgMCA0My45MEw0LjUwIDM4LjUwUTUuOTUgNDAuNDAgNy41NSA0MS4zOFE5LjE1IDQyLjM1IDExLjAwIDQyLjM1UTE1Ljk1IDQyLjM1IDE1Ljk1IDM2LjU1TDE1Ljk1IDE5LjkwTDMuNjUgMTkuOTBMMy42NSAxMy40MEwyNC4wMCAxMy40MEwyNC4wMCAzNi4xMFEyNC4wMCA0Mi42MCAyMC44MCA0NS44MFExNy42MCA0OSAxMS40MCA0OVpNMzkuMjUgNDguNDBMMzkuMjUgMjAuMDBMMjguMDUgMjAuMDBMMjguMDUgMTMuNDBMNTguNTUgMTMuNDBMNTguNTUgMjAuMDBMNDcuMzUgMjAuMDBMNDcuMzUgNDguNDBMMzkuMjUgNDguNDBaJy8+DQogIDwvZz4NCjwvc3ZnPg==)](https://github.com/cptblackmore/jobtracker) [![JobTracker Server](https://img.shields.io/badge/JobTracker-Server-96b9ff.svg?logo=data:image/svg%2bxml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA3MiA3Mic+DQogIDxyZWN0IHdpZHRoPSc3MicgaGVpZ2h0PSc3Micgcng9JzgnIGZpbGw9JyMzNzVFOTcnIC8+DQogIDxnIHRyYW5zZm9ybT0ndHJhbnNsYXRlKDUsIDUpJyBmaWxsPScjRUFGMkZGJz4NCiAgICA8cGF0aCBkPSdNMTEuNDAgNDlRNy44NSA0OSA0Ljg4IDQ3LjY3UTEuOTAgNDYuMzUgMCA0My45MEw0LjUwIDM4LjUwUTUuOTUgNDAuNDAgNy41NSA0MS4zOFE5LjE1IDQyLjM1IDExLjAwIDQyLjM1UTE1Ljk1IDQyLjM1IDE1Ljk1IDM2LjU1TDE1Ljk1IDE5LjkwTDMuNjUgMTkuOTBMMy42NSAxMy40MEwyNC4wMCAxMy40MEwyNC4wMCAzNi4xMFEyNC4wMCA0Mi42MCAyMC44MCA0NS44MFExNy42MCA0OSAxMS40MCA0OVpNMzkuMjUgNDguNDBMMzkuMjUgMjAuMDBMMjguMDUgMjAuMDBMMjguMDUgMTMuNDBMNTguNTUgMTMuNDBMNTguNTUgMjAuMDBMNDcuMzUgMjAuMDBMNDcuMzUgNDguNDBMMzkuMjUgNDguNDBaJy8+DQogIDwvZz4NCjwvc3ZnPg==)](https://github.com/cptblackmore/jobtracker-server) [![React ToDo List](https://img.shields.io/badge/React_ToDo_List-13877b?logo=react)](https://github.com/cptblackmore/reacttodolist)
+
 ## Возможности
 
 - Поиск мест через ввод с автопоиском и выбор из найденных вариантов.
@@ -22,25 +26,24 @@
 
 ![Пример работы](https://github.com/user-attachments/assets/aef58c09-8557-4f03-b7d6-cf49b0161dfb)
 
-## Инструменты и подходы
+## Стек
 
 #### Языки и архитектура
 
 - **HTML / CSS / JavaScript** без фреймворков
 - Использование **SPA-подхода**: одна страница, динамический контент без перезагрузки документа
     
+#### Сборка и разработка
 
-#### Сборка и инструменты
-
-- **Webpack** для сборки проекта
+- **Webpack** для сборки проекта и dev-сервера
 - Подключённые загрузчики:
     - `css-loader`  
     - `style-loader`   
     - `file-loader`    
     - `favicons-webpack-plugin`  
-- **ESLint** с конфигурацией под **Prettier** для автоформатирования и контроля кодстайла
+- **ESLint** с конфигурацией под **Prettier** для контроля кодстайла
 
-#### Внешние библиотеки
+#### Библиотеки
 
 - [autoComplete.js](https://github.com/TarekRaafat/autoComplete.js) — библиотека для автозаполнения строки ввода с минимальной настройкой
 
@@ -62,23 +65,23 @@
 0. Перед началом убедитесь, что у вас есть:
     - Node.js версии **18 и выше** — [скачать с nodejs.org](https://nodejs.org/)
     - Git — [скачать с git-scm.com](https://git-scm.com/)
-1. Клонируйте репозиторий: `git clone https://github.com/cptblackmore/typeweather`.
-2. Перейдите в него: `cd typeweather`.
-3. Установите зависимости: `npm install`.
-4. Запустите проект: `npm start`.
+1. Клонируйте репозиторий: `git clone https://github.com/cptblackmore/typeweather`
+2. Перейдите в него: `cd typeweather`
+3. Установите зависимости: `npm install`
+4. Запустите проект: `npm start`
 5. После запуска Webpack в терминале появятся адреса для доступа к проекту:
     - `http://localhost:8080` — для текущего устройства
     - `http://<ваш-IP>:8080` — для других устройств в вашей локальной сети (например, для проверки с телефона)
 
 ## Особенности проекта
 
-- **Двойной запрос к API**: Проект объединяет данные из двух API: сначала получая данные о местоположении по поисковому запросу, а затем отправляя запрос с координатами выбранного варианта в сервис с погодой.
-- **Динамический интерфейс**: Весь UI рендерится динамически через JavaScript, без фреймворков. При смене экрана обновляется только содержимое одного контейнера.
-- **Кэширование координат**: Повторы запросов к Geoapify исключены — координаты сохраняются в localStorage, что ускоряет работу и уменьшает нагрузку на API.
-- **Обработка ошибок**: Open-Meteo не возвращает информацию по всем возможным координатам — в таких случаях отображается сообщение об ошибке в интерфейсе.
+- **Двойной запрос к API**: проект объединяет данные из двух API: сначала получая данные о местоположении по поисковому запросу, а затем отправляя запрос с координатами выбранного варианта в сервис с погодой.
+- **Динамический интерфейс**: весь UI рендерится динамически через JavaScript, без фреймворков. При смене экрана обновляется только содержимое одного контейнера.
+- **Кэширование координат**: повторы запросов к Geoapify исключены — координаты сохраняются в localStorage, что ускоряет работу и уменьшает нагрузку на API.
+- **Обработка ошибок**: open-Meteo не возвращает информацию по всем возможным координатам — в таких случаях отображается сообщение об ошибке в интерфейсе.
 - **Шум в поиске**: API Geoapify может предлагать нерелевантные результаты (дубликаты, индексы) — ограничения бесплатного тарифа.
 
-### Идеи по улучшению
+## Планы по улучшению
 
 - **Навигация через History API**: реализовать переходы между экранами без потери состояния и с возможностью использования кнопок «назад» и «вперёд» в браузере.
 - **Автоматическое обновление данных**: периодически запрашивать актуальную информацию о погоде без необходимости ручного обновления.
